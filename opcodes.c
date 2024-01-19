@@ -18,19 +18,19 @@ void free_stack(stack_t **stack)
 }
 
 /**
-  * push_b - Function to add items to the top of stack
+  * pushIt - Function to add items to the top of stack
   * @stack: Stack to be added
-  * @line_num: Line number in the monty file
-  * @val: Value to be added
+  * @line_fig: Line number in the monty file
+  * @thing: Value to be added
   */
 
-void push_b(stack_t **stack, unsigned int line_num, int val)
+void pushIt(stack_t **stack, unsigned int line_fig, int thing)
 {
 	int mode = 0;
 	stack_t *curr;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	(void)line_num;
+	(void)line_fig;
 
 	if (new_node == NULL)
 	{
@@ -39,7 +39,7 @@ void push_b(stack_t **stack, unsigned int line_num, int val)
 		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = val;
+	new_node->n = thing;
 	new_node->prev = NULL;
 	if (mode == 0)
 	{
@@ -69,16 +69,16 @@ void push_b(stack_t **stack, unsigned int line_num, int val)
 }
 
 /**
-  * pall_b - Function to print the stack items
-  * @line_num: Line number of the file
+  * pallIt - Function to print the stack items
+  * @line_fig: Line number of the file
   * @stack: The current stack in question
   */
 
-void pall_b(stack_t **stack, unsigned int line_num)
+void pallIt(stack_t **stack, unsigned int line_fig)
 {
 	stack_t *curr = *stack;
 
-	(void)line_num;
+	(void)line_fig;
 
 	if (*stack == NULL)
 		return;
@@ -91,42 +91,45 @@ void pall_b(stack_t **stack, unsigned int line_num)
 }
 
 /**
-  * pint_b - Prints the value at the top of the stack
+  * pintIt - Prints the value at the top of the stack
   * @stack: the pointer to the stack items
-  * @line_num: line number of the monty file
+  * @line_fig: line number of the monty file
   */
 
-void pint_b(stack_t **stack, unsigned int line_num)
+void pintIt(stack_t **stack, unsigned int line_fig)
 {
-	stack_t *curr = *stack;
+	stack_t *temp;
 
-	if (*stack)
+	if (stack == NULL || *stack == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_num);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_fig);
 		exit(EXIT_FAILURE);
-		return;
 	}
 
-	if (curr)
+	temp = *stack;
+	while (temp)
 	{
-		printf("%d\n", curr->n);
-		curr = curr->next;
+		if (temp->prev == NULL)
+			break;
+		temp = temp->prev;
 	}
+
+	printf("%d\n", temp->n);
 }
 
 /**
-  * swap_b - Function to swap two elements of the stack
+  * swapIt - Function to swap two elements of the stack
   * @stack: Stack to be swapped
-  * @line_num: Line number of the file
+  * @line_fig: Line number of the file
   */
 
-void swap_b(stack_t **stack, unsigned int line_num)
+void swapIt(stack_t **stack, unsigned int line_fig)
 {
 	int n1, n2;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", line_num);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_fig);
 		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}

@@ -9,14 +9,19 @@
   * Return: 0 on success, 1 otherwise
   */
 
-int choose_opcode(char **tokens, stack_t **stack, unsigned int line_number)
+int selectOpcode(char **tokens, stack_t **stack, unsigned int line_number)
 {
 	instruction_t instructions[] = {
-		{"pall", pall_b},
-		{"pint", pint_b},
-		{"nop", nop_b},
-		{"pop", pop_b},
-		{"swap", swap_b},
+		{"pall", pallIt},
+		{"pint", pintIt},
+		{"nop", nopera},
+		{"pop", popIt},
+		{"swap", swapIt},
+		{"sub", subOpera},
+		{"add", addOpera},
+		{"mul", mulOpera},
+		{"div", divOpera},
+		{"mod", modOpera},
 		{NULL, NULL}
 	};
 

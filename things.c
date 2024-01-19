@@ -7,18 +7,18 @@
   * Return: the number of nodes
   */
 
-int len_of_stack(const stack_t *head)
+int lenOfStack(const stack_t *head)
 {
-	int node_count = 0;
+	int nodePlus = 0;
 
 	while (head != NULL)
 	{
-		node_count++; /* increment the node count when head is not NULL */
+		nodePlus++; /* increment the node count when head is not NULL */
 		head = head->next;
 	}
 
 	/* Return the number of nodes */
-	return (node_count);
+	return (nodePlus);
 }
 
 /**

@@ -16,21 +16,21 @@ void free_close_exit(char *line, stack_t *stack, FILE *file)
 }
 
 /**
-  * execute_file - Executes operations on the file
+  * parseFile - Executes operations on the file
   * @file: The file to be operated on
   */
 
-void execute_file(FILE *file)
+void parseFile(FILE *file)
 {
-	size_t count = 0;
+	size_t plus = 0;
 	char *buf = NULL, *value_of_str;
-	unsigned int line_num = 0;
+	unsigned int line_fig = 0;
 	char **tokens;
 	stack_t *stack = NULL;
 
-	while (getline(&buf, &count, file) != -1)
+	while (getline(&buf, &plus, file) != -1)
 	{
-		line_num++;
+		line_fig++;
 		if (!buf)
 		{
 			fprintf(stderr, "Error: malloc failed\n");
@@ -47,15 +47,15 @@ void execute_file(FILE *file)
 			if (value_of_str == NULL || !is_valid_integer(value_of_str))
 			{
 				fflush(stdout);
-				fprintf(stderr, "L%d: usage: push integer\n", line_num);
+				fprintf(stderr, "L%d: usage: push integer\n", line_fig);
 				free(value_of_str);
 				free_close_exit(buf, stack, file);
 			}
-			push_b(&stack, line_num, atoi(value_of_str));
+			pushIt(&stack, line_fig, atoi(value_of_str));
 		}
-		else if (choose_opcode(tokens, &stack, line_num) == 1)
+		else if (selectOpcode(tokens, &stack, line_fig) == 1)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, tokens[0]);
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_fig, tokens[0]);
 			free_close_exit(buf, stack, file);
 		}
 		free_array(tokens);
